@@ -2,7 +2,8 @@
 import type {TaskFilter} from "../types.ts";
 
 const props = defineProps<{
-  filter: TaskFilter
+  filter: TaskFilter;
+  currentFilter: TaskFilter;
 }>();
 
 const emits = defineEmits<{
@@ -11,7 +12,13 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <button class="secondary" @click="emits('setFilter', props.filter)">{{props.filter}}</button>
+  <button
+      class="secondary"
+      @click="emits('setFilter', props.filter)"
+      :class="{ contrast: props.filter === props.currentFilter}"
+  >
+    {{props.filter}}
+  </button>
 </template>
 
 <style scoped>
